@@ -9,6 +9,10 @@
   flex: 1;
 }
 
+.checked {
+  text-decoration: line-through;
+}
+
 .todolist_item {
   width: 100%;
   padding: 8px;

@@ -1,23 +1,35 @@
 import { useState } from 'react';
 import './App.css';
-import TodoListItem from './TodoListItem';
 
 function App() {
   const [list, setList] = useState([
-    { title: '빨래하기' },
-    { title: '세차하기' },
+    { title: '빨래하기', checked: true },
+    { title: '세차하기', checked: false },
   ]);
 
   const [value, setValue] = useState('');
-  console.log(value);
 
   function onAdd() {
-    setList([...list, { title: value }]);
+    setList([...list, { title: value, checked: false }]);
     setValue('');
   }
 
   function onDelete(index: number) {
-    setList(list.filter((_, i) => i !== index));
+    setList((list) => list.filter((_, i) => i !== index));
+  }
+
+  function onToggle(index: number) {
+    setList((list) =>
+      list.map((item, i) => {
+        if (i === index) {
+          return {
+            ...item,
+            checked: !item.checked,
+          };
+        }
+        return item;
+      })
+    );
   }
 
   return (
@@ -32,10 +44,17 @@ function App() {
       <div className='todolist'>
         {list.map((item, index) => (
           <div key={index} className='todolist_item'>
-            <div className='todolist_item_name'>{index + 1}</div>
-            <div className='todolist_item_title'>{item.title}</div>
-            <div className='todolist_item_button'>
-              <button>수정</button>
+            <div className='todolist_item_name'>
+              <input
+                type='checkbox'
+                checked={item.checked}
+                onChange={() => {
+                  onToggle(index);
+                }}
+              />
+            </div>
+            <div className={`todolist_item_title ${item.checked && 'checked'}`}>
+              {item.title}
             </div>
             <div className='todolist_item_button'>
               <button
