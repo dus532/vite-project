@@ -16,6 +16,10 @@ function App() {
     setValue('');
   }
 
+  function onDelete(index: number) {
+    setList(list.filter((_, i) => i !== index));
+  }
+
   return (
     <div className='App'>
       <input
@@ -27,7 +31,22 @@ function App() {
       <button onClick={onAdd}>추가하기</button>
       <div className='todolist'>
         {list.map((item, index) => (
-          <TodoListItem key={index} item={item} index={index} />
+          <div key={index} className='todolist_item'>
+            <div className='todolist_item_name'>{index + 1}</div>
+            <div className='todolist_item_title'>{item.title}</div>
+            <div className='todolist_item_button'>
+              <button>수정</button>
+            </div>
+            <div className='todolist_item_button'>
+              <button
+                onClick={() => {
+                  onDelete(index);
+                }}
+              >
+                삭제
+              </button>
+            </div>
+          </div>
         ))}
       </div>
     </div>
