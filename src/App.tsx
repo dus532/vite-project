@@ -11,6 +11,11 @@ function App() {
   const [value, setValue] = useState('');
   console.log(value);
 
+  function onAdd() {
+    setList([...list, { title: value }]);
+    setValue('');
+  }
+
   return (
     <div className='App'>
       <input
@@ -19,7 +24,7 @@ function App() {
           setValue(e.target.value);
         }}
       />
-      <button>추가하기</button>
+      <button onClick={onAdd}>추가하기</button>
       <div className='todolist'>
         {list.map((item, index) => (
           <TodoListItem key={index} item={item} index={index} />
