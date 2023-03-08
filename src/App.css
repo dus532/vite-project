@@ -1,0 +1,19 @@
+.todolist {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.todolist_item_title {
+  flex: 1;
+}
+
+.todolist_item {
+  width: 100%;
+  padding: 8px;
+  gap: 8px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid white;
+}
